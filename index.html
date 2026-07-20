@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La porte des étoiles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-deep:#0a0d1f;
+    --night:#12162f;
+    --night-soft:#1c2142;
+    --ivory:#f4f0e4;
+    --muted:#9296b8;
+    --gold:#c9a15e;
+    --gold-soft:rgba(201,161,94,0.35);
+    --line:rgba(201,161,94,0.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Work Sans',sans-serif;
+    background:var(--night-deep);
+    color:var(--ivory);
+    line-height:1.6;
+  }
+  .stars{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 22%, rgba(244,240,228,0.9), transparent),
+      radial-gradient(1px 1px at 28% 68%, rgba(244,240,228,0.7), transparent),
+      radial-gradient(1.5px 1.5px at 45% 12%, rgba(244,240,228,0.8), transparent),
+      radial-gradient(1px 1px at 63% 78%, rgba(244,240,228,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 78% 32%, rgba(244,240,228,0.9), transparent),
+      radial-gradient(1px 1px at 88% 58%, rgba(244,240,228,0.65), transparent),
+      radial-gradient(1.5px 1.5px at 8% 82%, rgba(244,240,228,0.7), transparent),
+      radial-gradient(1px 1px at 55% 45%, rgba(244,240,228,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 95% 88%, rgba(244,240,228,0.8), transparent),
+      radial-gradient(1px 1px at 35% 90%, rgba(244,240,228,0.55), transparent);
+    animation:twinkle 6s ease-in-out infinite alternate;
+  }
+  @media (prefers-reduced-motion: reduce){ .stars{animation:none;} }
+  @keyframes twinkle{ from{opacity:0.55;} to{opacity:1;} }
+
+  header{
+    position:relative; z-index:1;
+    min-height:92vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:3rem 1.5rem 4rem;
+    background:radial-gradient(ellipse at 50% 30%, var(--night-soft) 0%, var(--night) 45%, var(--night-deep) 100%);
+  }
+  .eyebrow{
+    font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--gold); font-weight:500; margin-bottom:1.75rem;
+    border:1px solid var(--gold-soft); border-radius:999px;
+    padding:0.4rem 1.1rem;
+  }
+  .glyph{ width:56px; height:56px; margin-bottom:1.75rem; opacity:0.9; }
+  h1{
+    font-family:'Spectral',serif; font-weight:400; font-style:italic;
+    font-size:clamp(2.4rem, 6vw, 4.2rem);
+    letter-spacing:0.01em; color:var(--ivory);
+    margin-bottom:1rem;
+  }
+  .tagline{
+    font-family:'Spectral',serif; font-weight:300;
+    font-size:clamp(1rem, 2vw, 1.25rem);
+    color:var(--muted); max-width:36em; margin:0 auto 2.5rem;
+  }
+  .intro{
+    max-width:34em; margin:0 auto; font-size:0.92rem; color:var(--ivory); opacity:0.82;
+    font-weight:300;
+  }
+  .scroll-cue{
+    margin-top:3rem; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  main{ position:relative; z-index:1; padding:0 1.5rem 6rem; max-width:1100px; margin:0 auto; }
+
+  .constellation{ display:block; margin:0 auto 0; max-width:1000px; width:100%; height:60px; }
+  .constellation line{ stroke:var(--line); stroke-width:1; }
+  .constellation circle{ fill:var(--gold); opacity:0.7; }
+
+  .portes{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-bottom:5rem;
+  }
+  .porte{
+    background:var(--night-deep);
+    padding:2.25rem 1.75rem;
+    text-decoration:none; color:inherit;
+    display:flex; flex-direction:column; gap:0.85rem;
+    transition:background 0.25s ease;
+    position:relative;
+  }
+  a.porte:hover{ background:var(--night); }
+  .porte-label{
+    font-size:0.65rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold);
+    font-weight:500;
+  }
+  .porte-nom{
+    font-family:'Spectral',serif; font-size:1.3rem; font-weight:500; color:var(--ivory);
+  }
+  .porte-desc{ font-size:0.85rem; color:var(--muted); font-weight:300; }
+  .porte-entrer{
+    margin-top:auto; padding-top:0.5rem;
+    font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold);
+  }
+  .porte.a-venir{ opacity:0.42; }
+  .porte.a-venir .porte-label{ color:var(--muted); }
+  .porte.a-venir .porte-entrer{ color:var(--muted); }
+
+  section.mot{
+    max-width:34em; margin:0 auto 5rem; text-align:center;
+  }
+  section.mot p{ font-size:0.92rem; color:var(--muted); font-weight:300; }
+  section.mot .signature{
+    margin-top:1.25rem; font-family:'Spectral',serif; font-style:italic; color:var(--gold-soft);
+    font-size:0.85rem;
+  }
+
+  footer{
+    position:relative; z-index:1;
+    border-top:1px solid var(--line);
+    padding:2.5rem 1.5rem; text-align:center;
+    font-size:0.75rem; color:var(--muted); font-weight:300;
+  }
+  footer a{ color:var(--gold); text-decoration:none; }
+  footer a:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<div class="stars" aria-hidden="true"></div>
+
+<header>
+  <span class="eyebrow">version provisoire</span>
+  <svg class="glyph" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="28" cy="28" r="26" stroke="#c9a15e" stroke-width="0.75" opacity="0.5"/>
+    <circle cx="28" cy="28" r="18" stroke="#c9a15e" stroke-width="0.75" opacity="0.7"/>
+    <line x1="28" y1="2" x2="28" y2="54" stroke="#c9a15e" stroke-width="0.6" opacity="0.5"/>
+    <line x1="2" y1="28" x2="54" y2="28" stroke="#c9a15e" stroke-width="0.6" opacity="0.5"/>
+    <path d="M28 10 L31 25 L46 28 L31 31 L28 46 L25 31 L10 28 L25 25 Z" fill="#c9a15e"/>
+  </svg>
+  <h1>La porte des étoiles</h1>
+  <p class="tagline">Un seuil entre la pensée et la pratique, la recherche et la salle de classe.</p>
+  <p class="intro">Chaque porte ouvre sur un espace distinct, mais aucune n'est fermée aux autres. Vous pouvez entrer par un jeu et ressortir par une théorie, ou l'inverse. C'est la même carte du ciel.</p>
+  <div class="scroll-cue">franchir un seuil ↓</div>
+</header>
+
+<main>
+
+  <svg class="constellation" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="100" y1="30" x2="300" y2="30"/>
+    <line x1="300" y1="30" x2="500" y2="30"/>
+    <line x1="500" y1="30" x2="700" y2="30"/>
+    <line x1="700" y1="30" x2="900" y2="30"/>
+    <circle cx="100" cy="30" r="2.5"/>
+    <circle cx="300" cy="30" r="2.5"/>
+    <circle cx="500" cy="30" r="2.5"/>
+    <circle cx="700" cy="30" r="2.5"/>
+    <circle cx="900" cy="30" r="2.5"/>
+  </svg>
+
+  <div class="portes">
+    <a class="porte" href="https://archipel.samibenmansour.com" target="_blank" rel="noopener">
+      <span class="porte-label">Îles de pensée</span>
+      <span class="porte-nom">Archipel des idées</span>
+      <span class="porte-desc">Lewin, Rogers, Morin, Bateson et d'autres, une île à la fois.</span>
+      <span class="porte-entrer">Entrer →</span>
+    </a>
+
+    <a class="porte" href="https://claude-lab.samibenmansour.com" target="_blank" rel="noopener">
+      <span class="porte-label">Atelier IA</span>
+      <span class="porte-nom">Claude Lab</span>
+      <span class="porte-desc">Apprendre à construire avec l'intelligence artificielle, pas seulement à s'en servir.</span>
+      <span class="porte-entrer">Entrer →</span>
+    </a>
+
+    <a class="porte" href="https://le-jeu-rh.samibenmansour.com" target="_blank" rel="noopener">
+      <span class="porte-label">Mise en situation</span>
+      <span class="porte-nom">Le Jeu RH</span>
+      <span class="porte-desc">La gestion des ressources humaines éprouvée à plusieurs, pas seulement lue.</span>
+      <span class="porte-entrer">Entrer →</span>
+    </a>
+
+    <div class="porte a-venir">
+      <span class="porte-label">À venir</span>
+      <span class="porte-nom">Wiki des théories de l'organisation</span>
+      <span class="porte-desc">Les courants qui ont pensé l'organisation, reliés entre eux, du Taylorisme aux approches contemporaines.</span>
+      <span class="porte-entrer">En construction</span>
+    </div>
+
+    <div class="porte a-venir">
+      <span class="porte-label">À venir · rentrée</span>
+      <span class="porte-nom">Cours ISCAE — Digitalisation RH</span>
+      <span class="porte-desc">Un espace de co-construction avec les étudiants, autour de l'IA pour les RH et le management.</span>
+      <span class="porte-entrer">Ouverture prochaine</span>
+    </div>
+  </div>
+
+  <section class="mot">
+    <p>Cet espace n'a pas de plan fixé d'avance. Il se construit par l'usage, s'ajuste, s'étend. Ce qui le tient ensemble n'est pas encore écrit, il se révèlera en marchant.</p>
+    <p class="signature">Sami Ben Mansour</p>
+  </section>
+
+</main>
+
+<footer>
+  Prototype en construction · <a href="https://samibenmansour.com">samibenmansour.com</a> · <a href="mailto:samibm@etik.com">samibm@etik.com</a>
+</footer>
+
+</body>
+</html>
